@@ -16,11 +16,19 @@ function convertLength($value, $fromUnit, $toUnit)
         'centimeters' => 100,
     ];
 
-    if(!isset($conversionFactors[$fromUnit]) || !isset($conversionFactors[$toUnit])) {
+    if (!isset($conversionFactors[$fromUnit]) || !isset($conversionFactors[$toUnit])) {
         return "You have entered incorrect units";
     }
 
-    $result = $value * $conversionFactors[$fromUnit] / $conversionFactors[$toUnit];
+    // Adjust the calculation based on the direction of conversion
+    if ($fromUnit === 'meters' && $toUnit === 'centimeters') {
+        $result = $value * $conversionFactors['meters'] * $conversionFactors['centimeters'];
+    } elseif ($fromUnit === 'centimeters' && $toUnit === 'meters') {
+        $result = $value / $conversionFactors['centimeters'] / $conversionFactors['meters'];
+    } else {
+        // Default calculation for other conversions
+        $result = $value * $conversionFactors[$fromUnit] / $conversionFactors[$toUnit];
+    }
 
     return $result;
 }
