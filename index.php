@@ -7,14 +7,13 @@
     <title>Document</title>
 </head>
 
-
 <?php
 
 function convertLength($value, $fromUnit, $toUnit)
 {
     $conversionFactors = [
-        //meters
-        //cm
+        'meters' => 1,
+        'centimeters' => 100,
     ];
 
     if(!isset($conversionFactors[$fromUnit]) || !isset($conversionFactors[$toUnit])) {
@@ -35,10 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<p>{$value} {$fromUnit} is equal to: {$result} {$toUnit}</p>";
 }
 
-
-
 ?>
-
 
 <body>
     <form method="post" action="">
@@ -47,14 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="from_unit">From:</label>
         <select name="from_unit" required>
-            <option value="centimeters">Centimeter</option>
             <option value="meters">Meter</option>
+            <option value="centimeters">Centimeter</option>
         </select>
 
         <label for="to_unit">To :</label>
         <select name="to_unit" required>
-            <option value="centimeter">Centimeter</option>
             <option value="meters">Meter</option>
+            <option value="centimeters">Centimeter</option>
         </select>
 
         <button type="submit">Convert</button>
